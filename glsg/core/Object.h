@@ -1,5 +1,5 @@
-#ifndef _GLSG_OBJECT_H
-#define _GLSG_OBJECT_H
+#ifndef GLSG_OBJECT_H
+#define GLSG_OBJECT_H
 
 #include <memory>
 

@@ -1,5 +1,5 @@
-#ifndef _GLSG_APPLICATIONQUITCOMMAND_H
-#define _GLSG_APPLICATIONQUITCOMMAND_H
+#ifndef GLSG_APPLICATIONQUITCOMMAND_H
+#define GLSG_APPLICATIONQUITCOMMAND_H
 
 #include <command/Command.h>
 #include <core/Object.h>

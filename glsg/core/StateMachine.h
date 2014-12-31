@@ -1,9 +1,8 @@
-#ifndef _GLSG_STATEMACHINE_H
-#define _GLSG_STATEMACHINE_H
+#ifndef GLSG_STATEMACHINE_H
+#define GLSG_STATEMACHINE_H
 
 #include <stack>
 #include <core/StateMachineState.h>
-#include <scene/Scene.h>
 
 namespace glsg {
 

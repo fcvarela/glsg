@@ -1,10 +1,10 @@
 from camera import Camera
-from scene import Scene
+from scene import SceneGraphScene
 from scene_node import SceneNode
 from render_state import State
 
 assert Camera
-assert Scene
+assert SceneGraphScene
 assert SceneNode
 assert State
 

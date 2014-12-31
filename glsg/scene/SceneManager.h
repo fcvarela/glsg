@@ -1,5 +1,5 @@
-#ifndef _GLSG_SCENEMANAGER_H
-#define _GLSG_SCENEMANAGER_H
+#ifndef GLSG_SCENEMANAGER_H
+#define GLSG_SCENEMANAGER_H
 
 #include <core/Object.h>
 #include <scene/Scene.h>
@@ -7,14 +7,15 @@
 #include <component/InputComponent.h>
 
 namespace glsg {
-
+/**
+* A scenemanager manages a stack of scenes using a state machine and command interface.
+* @ingroup scene
+*/
 class SceneManager: public Object {
 public:
     typedef std::shared_ptr<SceneManager> Ptr;
 
-    SceneManager();
-
-    ~SceneManager();
+    virtual ~SceneManager();
 
     void pushScene(Scene::Ptr scene);
 
@@ -30,9 +31,7 @@ public:
     * Factory method to make scenemanager.
     * @param inputComponent set this input component.
     */
-    static SceneManager *makeSceneManager(
-            InputComponent *inputComponent
-    ) {
+    static SceneManager *makeSceneManager(InputComponent *inputComponent) {
         SceneManager *sm = new SceneManager();
         sm->_inputComponent = InputComponent::Ptr(inputComponent);
         return sm;
@@ -40,6 +39,14 @@ public:
 
 
 private:
+    /**
+    * Forces use of factory method to create instances.
+    */
+    SceneManager();
+
+    /**
+    * The scene manager's scenes.
+    */
     Scene::Stack _managedScenes;
 
     /**

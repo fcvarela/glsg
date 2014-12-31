@@ -78,7 +78,7 @@ void Camera::draw(SceneNode::Vec drawables) {
 
     // go through the nodes which contain drawables and apply their renderstate
     for (auto drawable: drawables) {
-        LDEBUG("Scene applying state for drawable");
+        LDEBUG("SceneGraphScene applying state for drawable");
         drawable->getState()->apply();
 
         //fixme: this should be optimized, uniform locations _should_ come from program in order to support caching

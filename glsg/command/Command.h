@@ -1,5 +1,5 @@
-#ifndef _GLSG_COMMAND_H
-#define _GLSG_COMMAND_H
+#ifndef GLSG_COMMAND_H
+#define GLSG_COMMAND_H
 
 #include <log/Log.h>
 

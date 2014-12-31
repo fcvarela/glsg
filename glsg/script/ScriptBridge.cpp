@@ -3,6 +3,10 @@
 #include <application/Application.h>
 #include <script/ScriptBridge.h>
 #include <shader/ShaderRegistry.h>
+#include <scenegraph/SceneNode.h>
+#include <render/Camera.h>
+#include <scene/SceneGraphScene.h>
+#include <scene/UIScene.h>
 
 namespace glsg {
 
@@ -68,9 +72,11 @@ BOOST_PYTHON_MODULE (camera) {
 }
 
 BOOST_PYTHON_MODULE (scene) {
-    class_<Scene, Scene::Ptr>("Scene", init<std::string, uint32_t, uint32_t>())
-            .def("setCamera", &Scene::setCamera)
-            .def("setSceneGraph", &Scene::setSceneGraph);
+    class_<SceneGraphScene, SceneGraphScene::Ptr>("SceneGraphScene", init<std::string, uint32_t, uint32_t>())
+            .def("setCamera", &SceneGraphScene::setCamera)
+            .def("setSceneGraph", &SceneGraphScene::setSceneGraph);
+
+    class_<UIScene, UIScene::Ptr>("UIScene", init<std::string, uint32_t, uint32_t>());
 }
 
 BOOST_PYTHON_MODULE (framebuffer) {

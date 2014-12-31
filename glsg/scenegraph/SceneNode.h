@@ -9,7 +9,6 @@
 #include <state/State.h>
 
 namespace glsg {
-
 /**
 * A scene graph node which implements coordinate transformation and encapsulation.
 * @ingroup scenegraph

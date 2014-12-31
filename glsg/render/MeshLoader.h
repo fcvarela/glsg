@@ -1,5 +1,5 @@
-#ifndef _GLSG_MESHLOADER_H
-#define _GLSG_MESHLOADER_H
+#ifndef GLSG_MESHLOADER_H
+#define GLSG_MESHLOADER_H
 
 #include <render/Mesh.h>
 

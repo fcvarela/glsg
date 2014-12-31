@@ -1,20 +1,22 @@
 #include <glsg/application/Application.h>
 #include <glsg/script/PythonScript.h>
+#include <glsg/scene/UIScene.h>
+#include <glsg/scene/SceneGraphScene.h>
 
 #include "SGSceneManagerInputComponent.h"
 #include "SGAppInputComponent.h"
 
 using namespace glsg;
 
-Scene::Ptr makeGameScene(uint32_t width, uint32_t height) {
-    auto scene = Scene::Ptr(new Scene("GameScene", width, height));
-    PythonScript<Scene>::Ptr(new PythonScript<Scene>("game_scene", scene.get()));
+SceneGraphScene::Ptr makeGameScene(uint32_t width, uint32_t height) {
+    auto scene = SceneGraphScene::Ptr(new SceneGraphScene("GameScene", width, height));
+    PythonScript<SceneGraphScene>::Ptr(new PythonScript<SceneGraphScene>("game_scene", scene.get()));
     return scene;
 }
 
-Scene::Ptr makeMainMenuScene(uint32_t width, uint32_t height) {
-    auto scene = Scene::Ptr(new Scene("MainMenuScene", width, height));
-    PythonScript<Scene>::Ptr(new PythonScript<Scene>("mainmenu_scene", scene.get()));
+UIScene::Ptr makeMainMenuScene(uint32_t width, uint32_t height) {
+    auto scene = UIScene::Ptr(new UIScene("MainMenuScene", width, height));
+    PythonScript<UIScene>::Ptr(new PythonScript<UIScene>("mainmenu_scene", scene.get()));
     return scene;
 }
 
@@ -36,8 +38,8 @@ int App_main() {
     sm->pushScene(mainMenuScene);
 
     // create our game scene and push it to the scenemanager
-    auto gameScene = makeGameScene(640, 400);
-    sm->pushScene(gameScene);
+//    auto gameScene = makeGameScene(640, 400);
+//    sm->pushScene(gameScene);
 
     // start the app
     app->start();

@@ -26,7 +26,8 @@ list (APPEND GLSG_SOURCES
     glsg/render/Mesh.cpp
     glsg/render/MeshLoader.cpp
     glsg/resource/ResourceLoader.cpp
-    glsg/scene/Scene.cpp
+    glsg/scene/SceneGraphScene.cpp
+    glsg/scene/UIScene.cpp
     glsg/scene/SceneManager.cpp
     glsg/scenegraph/SceneNode.cpp
     glsg/scenegraph/SceneNodeCullVisitor.cpp
@@ -71,6 +72,8 @@ list (APPEND GLSG_INCLUDE_FILES
     glsg/render/RenderPass.h
     glsg/resource/ResourceLoader.h
     glsg/scene/Scene.h
+    glsg/scene/SceneGraphScene.h
+    glsg/scene/UIScene.h
     glsg/scene/SceneManager.h
     glsg/scenegraph/SceneNode.h
     glsg/scenegraph/SceneNodeCullVisitor.h

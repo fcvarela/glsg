@@ -1,5 +1,5 @@
-#ifndef _GLSG_INPUT_H
-#define _GLSG_INPUT_H
+#ifndef GLSG_INPUT_H
+#define GLSG_INPUT_H
 
 namespace glsg {
 
