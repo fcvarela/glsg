@@ -12,6 +12,10 @@ if [ ! -f "${executable}.app/Contents/PkgInfo" ]; then
     echo -n "APPL????" > "${executable}.app/Contents/PkgInfo"
 fi
 
+if [ ! -f "${executable}.app/Contents/Frameworks" ]; then
+    mkdir -p "${executable.app}/Contents/Frameworks"
+fi
+
 if [ ! -f "${executable}.app/Contents/Info.plist" ]; then
     cat > "${executable}.app/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>

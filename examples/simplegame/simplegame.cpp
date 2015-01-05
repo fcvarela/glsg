@@ -38,8 +38,8 @@ int App_main() {
     sm->pushScene(mainMenuScene);
 
     // create our game scene and push it to the scenemanager
-//    auto gameScene = makeGameScene(640, 400);
-//    sm->pushScene(gameScene);
+    auto gameScene = makeGameScene(640, 400);
+    sm->pushScene(gameScene);
 
     // start the app
     app->start();

@@ -6,6 +6,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(BUILD_SHARED_LIBS OFF)
 add_definitions("-Wno-undefined-inline")
 
+if (APPLE)
+    set(CMAKE_PREFIX_PATH /usr/local)
+endif(APPLE)
+
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build")
 set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build/lib")
 
@@ -95,7 +99,7 @@ list (APPEND GLSG_INCLUDE_FILES
 include_directories(glsg)
 
 # create out target
-add_library(${GLSG_LIBRARY_NAME} STATIC ${GLSG_SOURCES})
+add_library(${GLSG_LIBRARY_NAME} ${GLSG_SOURCES})
 
 # dependency packages
 find_package(PkgConfig REQUIRED)
