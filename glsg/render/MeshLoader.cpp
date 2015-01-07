@@ -16,7 +16,10 @@ Mesh::Ptr MeshLoader::loadMesh(const std::string &name) {
 
     const aiScene *scene = importer.ReadFileFromMemory(
             modelData.data, modelData.size,
-            aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_OptimizeGraph | aiProcess_OptimizeMeshes);
+            aiProcessPreset_TargetRealtime_MaxQuality | \
+            aiProcess_OptimizeGraph | \
+            aiProcess_OptimizeMeshes | \
+            aiProcess_CalcTangentSpace);
 
     if (!scene) {
         LDEBUG(importer.GetErrorString());
