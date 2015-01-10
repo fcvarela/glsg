@@ -4,5 +4,5 @@
 
 void do_common() {
     vertex = v;
-    normal = normalize(vec3(viewMatrix * modelMatrix * vec4(n, 0.0)));
+    normal = normalize(vec3(normalMatrix * vec4(n, 0.0)));
 }

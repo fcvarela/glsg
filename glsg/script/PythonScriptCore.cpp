@@ -25,8 +25,6 @@ PythonScriptCore::PythonScriptCore() {
         PyObject *sysPath = PySys_GetObject((char *) "path");
         PyList_Insert(sysPath, 0, PyString_FromString(workingDir.string().c_str()));
 
-        LINFO("Registered package path: " << workingDir.string());
-
         // Load the sys module.
         object sys = object(handle<>(borrowed(PyImport_ImportModule("sys"))));
 

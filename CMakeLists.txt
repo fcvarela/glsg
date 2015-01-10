@@ -6,6 +6,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(BUILD_SHARED_LIBS OFF)
 add_definitions("-Wno-undefined-inline")
 
+if (APPLE)
+    set(CMAKE_PREFIX_PATH /usr/local)
+endif(APPLE)
+
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build")
 set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build/lib")
 
@@ -21,6 +25,7 @@ list (APPEND GLSG_SOURCES
     glsg/input/InputListener.cpp
     glsg/log/Log.cpp
     glsg/render/Camera.cpp
+    glsg/render/CameraCommands.h
     glsg/render/Framebuffer.cpp
     glsg/render/GL.cpp
     glsg/render/Mesh.cpp
@@ -64,6 +69,7 @@ list (APPEND GLSG_INCLUDE_FILES
     glsg/input/InputListener.h
     glsg/log/Log.h
     glsg/render/Camera.h
+    glsg/render/CameraCommands.h
     glsg/render/FrameBuffer.h
     glsg/render/GL.h
     glsg/render/Mesh.h
@@ -95,12 +101,13 @@ list (APPEND GLSG_INCLUDE_FILES
 include_directories(glsg)
 
 # create out target
-add_library(${GLSG_LIBRARY_NAME} STATIC ${GLSG_SOURCES})
+add_library(${GLSG_LIBRARY_NAME} ${GLSG_SOURCES})
 
 # dependency packages
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
 find_package(OpenGL REQUIRED)
+find_package(ANTTWEAKBAR REQUIRED)
 find_package(OpenCL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(CxxTest REQUIRED)
@@ -146,6 +153,7 @@ target_link_libraries(${GLSG_LIBRARY_NAME} ${Boost_FILESYSTEM_LIBRARY})
 target_link_libraries(${GLSG_LIBRARY_NAME} ${Boost_SYSTEM_LIBRARY})
 target_link_libraries(${GLSG_LIBRARY_NAME} ${Boost_PYTHON_LIBRARY})
 target_link_libraries(${GLSG_LIBRARY_NAME} ${PYTHON_LIBRARIES})
+target_link_libraries(${GLSG_LIBRARY_NAME} ${ANT_TWEAK_BAR_LIBRARY})
 
 target_link_libraries(${GLSG_LIBRARY_NAME} ${EXTRA_LIBS})
 
