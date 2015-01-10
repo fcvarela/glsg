@@ -1,5 +1,5 @@
 # GLSG
-Minimalistic scenography rendering toolkit based on GL4.1/GLFW/GLEW/GLM
+Minimalistic scenegraph rendering toolkit based on GL4.1/GLFW/GLEW/GLM
 
 # Build
 GLSG is built using cmake and will place all binaries in a folder named 'build' at the root of the project.
