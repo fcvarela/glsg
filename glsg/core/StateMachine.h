@@ -8,7 +8,6 @@ namespace glsg {
 
 class StateMachine {
 public:
-
     inline void pushState(StateMachineState::Ptr state) {
         _stateStack.push(state);
     }
@@ -23,7 +22,7 @@ public:
 
     virtual void update(double dt) = 0;
 
-private:
+protected:
     std::stack<StateMachineState::Ptr> _stateStack;
 };
 

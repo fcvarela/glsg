@@ -20,7 +20,7 @@ def init_game_scene(gameScene):
     cowNode.getState().setProgram("cow_program")
 
     # pull camera back
-    cameraNode.translate(0.0, 0.0, -20.0)
+    cameraNode.translate(0.0, 0.0, 20.0)
 
     # create topology
     rootNode.addChild(cameraNode)

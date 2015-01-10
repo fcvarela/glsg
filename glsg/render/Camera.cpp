@@ -59,7 +59,7 @@ glm::dmat4 Camera::getProjectionMatrix() {
 }
 
 glm::dmat4 Camera::getViewMatrix() {
-    return _sceneNode->getLocalToWorldMatrix();
+    return glm::inverse(_sceneNode->getWorldTransformMatrix());
 }
 
 void Camera::draw(SceneNode::Vec drawables) {
@@ -87,13 +87,18 @@ void Camera::draw(SceneNode::Vec drawables) {
         GLint projectionMatrix_id = glGetUniformLocation(drawable->getState()->program->getProgramID(), "projectionMatrix");
         GLint viewMatrix_id = glGetUniformLocation(drawable->getState()->program->getProgramID(), "viewMatrix");
         GLint modelMatrix_id = glGetUniformLocation(drawable->getState()->program->getProgramID(), "modelMatrix");
+        GLint normalMatrix_id = glGetUniformLocation(drawable->getState()->program->getProgramID(), "normalMatrix");
 
         glUniformMatrix4fv(projectionMatrix_id, 1, GL_FALSE, &f_pm[0][0]);
         glUniformMatrix4fv(viewMatrix_id, 1, GL_FALSE, &f_vm[0][0]);
 
-        glm::mat4 f_mm(drawable->getLocalToWorldMatrix());
+        glm::mat4 f_mm(drawable->getWorldTransformMatrix());
+
+        // inverse transpose modelview = normalmatrix
+        glm::mat4 f_nm(glm::inverseTranspose(getViewMatrix() * drawable->getWorldTransformMatrix()));
 
         glUniformMatrix4fv(modelMatrix_id, 1, GL_FALSE, &f_mm[0][0]);
+        glUniformMatrix4fv(normalMatrix_id, 1, GL_FALSE, &f_nm[0][0]);
 
         // get the meshes and draw them
         if (drawable->getMesh() != nullptr) {

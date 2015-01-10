@@ -25,6 +25,10 @@ void SceneGraphScene::setCamera(const std::string &name, Camera::Ptr camera) {
     _cameras[name]->setViewport(_width, _height);
 }
 
+Camera::Ptr SceneGraphScene::getCamera(const std::string &name) {
+    return _cameras[name];
+}
+
 void SceneGraphScene::update(double dt) {
     LDEBUG("Update start - " << _name);
 

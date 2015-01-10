@@ -11,7 +11,7 @@ SceneNode::SceneNode(const std::string &name) :
     LINFO("Alloc " << name);
 
     _transformMatrix = glm::dmat4(1.0);
-    _localToWorldMatrix = glm::dmat4(1.0);
+    _worldTransformMatrix = glm::dmat4(1.0);
     _active = true;
     _parent = nullptr;
     _dirtyTransform = false;
@@ -102,8 +102,8 @@ void SceneNode::recomputeBounds() {
 
     // now we need to recompute our bounds in world space
     _worldBounds = glm::dbox3();
-    _worldBounds.extend(glm::dvec3(_localToWorldMatrix * glm::dvec4(_localBounds.minimum, 1.0)));
-    _worldBounds.extend(glm::dvec3(_localToWorldMatrix * glm::dvec4(_localBounds.maximum, 1.0)));
+    _worldBounds.extend(glm::dvec3(_worldTransformMatrix * glm::dvec4(_localBounds.minimum, 1.0)));
+    _worldBounds.extend(glm::dvec3(_worldTransformMatrix * glm::dvec4(_localBounds.maximum, 1.0)));
 
     _dirtyBounds = false;
 }
@@ -116,16 +116,8 @@ glm::dmat4 SceneNode::getTransformMatrix() {
     return _transformMatrix;
 }
 
-glm::dmat4 SceneNode::getLocalToWorldMatrix() {
-    return _localToWorldMatrix;
-}
-
-glm::dmat4 SceneNode::getWorldToLocalMatrix() {
-    return _worldToLocalMatrix;
-}
-
-glm::dvec3 SceneNode::getWorldPosition() {
-    return _worldPosition;
+glm::dmat4 SceneNode::getWorldTransformMatrix() {
+    return _worldTransformMatrix;
 }
 
 void SceneNode::setActive(bool active) {
@@ -134,18 +126,15 @@ void SceneNode::setActive(bool active) {
 
 void SceneNode::recomputeTransforms() {
     if (_parent != nullptr) {
-        _localToWorldMatrix = _parent->getLocalToWorldMatrix() * _transformMatrix;
+        _worldTransformMatrix = _parent->getWorldTransformMatrix() * _transformMatrix;
     } else {
-        _localToWorldMatrix = _transformMatrix;
+        _worldTransformMatrix = _transformMatrix;
     }
 
     // this needs to be recursive
     for (auto child : _children) {
         child->recomputeTransforms();
     }
-
-    _worldToLocalMatrix = glm::inverse(_localToWorldMatrix);
-    _worldPosition = glm::dvec3(_localToWorldMatrix * glm::dvec4(1.0));
 
     _dirtyTransform = false;
 

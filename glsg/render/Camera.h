@@ -7,6 +7,7 @@
 #include <glmext/glmext.h>
 #include <render/Framebuffer.h>
 #include <scenegraph/SceneNode.h>
+#include <component/InputComponent.h>
 
 namespace glsg {
 
@@ -69,6 +70,13 @@ public:
     * Returns this camera's view matrix.
     */
     glm::dmat4 getViewMatrix();
+
+    /**
+    * Sets the camera's input component.
+    */
+    void setInputComponent(InputComponent *inputComponent) {
+        _sceneNode->setInputComponent(inputComponent);
+    }
 
 private:
     /**

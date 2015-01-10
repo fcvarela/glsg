@@ -7,13 +7,15 @@
 #include <render/Mesh.h>
 #include <glmext/glmext.h>
 #include <state/State.h>
+#include <core/Object.h>
+#include <component/InputComponent.h>
 
 namespace glsg {
 /**
 * A scene graph node which implements coordinate transformation and encapsulation.
 * @ingroup scenegraph
 */
-class SceneNode : public std::enable_shared_from_this<SceneNode> {
+class SceneNode : public Object, public std::enable_shared_from_this<SceneNode> {
 public:
     typedef std::shared_ptr<SceneNode> Ptr;
     typedef std::vector<Ptr> Vec;
@@ -143,17 +145,7 @@ public:
     /**
     * Get local frame to world frame transformation matrix.
     */
-    glm::dmat4 getLocalToWorldMatrix();
-
-    /**
-    * Get world frame to local frame transformation matrix.
-    */
-    glm::dmat4 getWorldToLocalMatrix();
-
-    /**
-    * Get world position.
-    */
-    glm::dvec3 getWorldPosition();
+    glm::dmat4 getWorldTransformMatrix();
 
     /**
     * Set whether this node is active and should, therefore, be updated, culled and drawn.
@@ -175,6 +167,17 @@ public:
         return &_renderState;
     }
 
+    /**
+    * Sets the node's input component.
+    */
+    inline void setInputComponent(InputComponent *inputComponent) {
+        _inputComponent = InputComponent::Ptr(inputComponent);
+    }
+
+    inline InputComponent::Ptr getInputComponent() {
+        return _inputComponent;
+    }
+
 private:
     /**
     * This node unique name.
@@ -190,11 +193,6 @@ private:
     * Node bounding box in world reference frame.
     */
     glm::dbox3 _worldBounds;
-
-    /**
-    * Node position in world coordinates.
-    */
-    glm::dvec3 _worldPosition;
 
     /**
     * Node active state.
@@ -219,12 +217,7 @@ private:
     /**
     * Matrix to transform local frame to world frame.
     */
-    glm::dmat4 _localToWorldMatrix;
-
-    /**
-    * Matrix to transform world frame to local frame.
-    */
-    glm::dmat4 _worldToLocalMatrix;
+    glm::dmat4 _worldTransformMatrix;
 
     /**
     * The mesh contained in this node.
@@ -245,6 +238,11 @@ private:
     * This node's renderstate for drawing and sorting.
     */
     State _renderState;
+
+    /**
+    * This node's input component
+    */
+    InputComponent::Ptr _inputComponent;
 };
 
 }
