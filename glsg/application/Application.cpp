@@ -1,6 +1,5 @@
 #include <application/Application.h>
 #include <shader/ShaderRegistry.h>
-#include <input/InputListener.h>
 #include <script/ScriptBridge.h>
 
 namespace glsg {

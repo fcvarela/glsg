@@ -8,6 +8,8 @@ Input InputListener::_input;
 
 void InputListener::mouse_move_callback(GLFWwindow *window, double x, double y) {
     LDEBUG("MOUSE MOVE CALLBACK");
+//    if (TwEventMousePosGLFW(x, y))
+//        return;
 
     _input.mouseMove.valid = true;
 
@@ -21,13 +23,13 @@ void InputListener::mouse_move_callback(GLFWwindow *window, double x, double y) 
 void InputListener::mouse_click_callback(GLFWwindow *window, int button, int action, int mods) {
     LDEBUG("MOUSE CLICK CALLBACK");
 
+//    if (TwEventMouseButtonGLFW(button, action))
+//        return;
 
 }
 
 void InputListener::mouse_scroll_callback(GLFWwindow *window, double x, double y) {
     LDEBUG("MOUSE SCROLL CALLBACK");
-
-
 }
 
 void InputListener::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
@@ -50,6 +52,19 @@ void InputListener::key_callback(GLFWwindow *window, int key, int scancode, int 
 
 void InputListener::initialize() {
     LINFO("Starting");
+
+    // reset cursor position
+    int width, height;
+    glfwGetWindowSize(glsg::graphics::getWindow(), &width, &height);
+    glfwSetCursorPos(glsg::graphics::getWindow(), width/2, height/2);
+    glfwGetCursorPos(glsg::graphics::getWindow(),
+            &_input.mouseMove.x,
+            &_input.mouseMove.y
+    );
+
+    _input.mouseMove.dist_x = 0;
+    _input.mouseMove.dist_y = 0;
+    glfwSetInputMode(glsg::graphics::getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // register callbacks
     glfwSetKeyCallback(glsg::graphics::getWindow(), InputListener::key_callback);

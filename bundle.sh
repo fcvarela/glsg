@@ -13,7 +13,7 @@ if [ ! -f "${executable}.app/Contents/PkgInfo" ]; then
 fi
 
 if [ ! -f "${executable}.app/Contents/Frameworks" ]; then
-    mkdir -p "${executable.app}/Contents/Frameworks"
+    mkdir -p "${executable}.app/Contents/Frameworks"
 fi
 
 if [ ! -f "${executable}.app/Contents/Info.plist" ]; then

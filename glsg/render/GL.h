@@ -39,6 +39,10 @@ void shutdown();
 
 GLFWwindow *getWindow();
 
+uint32_t getWidth();
+
+uint32_t getHeight();
+
 extern GLFWwindow *_window;
 
 void makeFullscreenContext();

@@ -37,11 +37,11 @@ public:
         }
 
         if (input->mouseMove.valid) {
-            commands.push_back(Command::Ptr(
-                    new CameraRotateCommand(glm::dvec3(-1.0, 0.0, 0.0), input->mouseMove.dist_y/100.0)));
-
-            commands.push_back(Command::Ptr(
-                    new CameraRotateCommand(glm::dvec3(0.0, -1.0, 0.0), input->mouseMove.dist_x/100.0)));
+            LDEBUG("WILL ROTATE CAMERA by " << input->mouseMove.dist_x);
+            commands.push_back(Command::Ptr(new CameraRotateCommand(glm::dvec3(-1.0, 0.0, 0.0), input->mouseMove.dist_y/500.0)));
+            commands.push_back(Command::Ptr(new CameraRotateCommand(glm::dvec3(0.0, -1.0, 0.0), input->mouseMove.dist_x/500.0)));
+        } else {
+            LDEBUG("WILL NOT ROTATE CAMERA");
         }
 
         return commands;

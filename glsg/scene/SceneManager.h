@@ -15,6 +15,8 @@ class SceneManager: public Object {
 public:
     typedef std::shared_ptr<SceneManager> Ptr;
 
+    SceneManager();
+
     virtual ~SceneManager();
 
     void pushScene(Scene::Ptr scene);
@@ -27,23 +29,11 @@ public:
 
     void draw();
 
-    /**
-    * Factory method to make scenemanager.
-    * @param inputComponent set this input component.
-    */
-    static SceneManager *makeSceneManager(InputComponent *inputComponent) {
-        SceneManager *sm = new SceneManager();
-        sm->_inputComponent = InputComponent::Ptr(inputComponent);
-        return sm;
+    inline void setInputComponent(InputComponent *inputComponent) {
+        _inputComponent = InputComponent::Ptr(inputComponent);
     }
 
-
 private:
-    /**
-    * Forces use of factory method to create instances.
-    */
-    SceneManager();
-
     /**
     * The scene manager's scenes.
     */

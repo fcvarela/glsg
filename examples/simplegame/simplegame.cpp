@@ -26,25 +26,26 @@ UIScene::Ptr makeMainMenuScene(uint32_t width, uint32_t height) {
 }
 
 int App_main() {
-    // create the application instance
-    auto app = Application::Ptr(new Application(640, 400, false));
-
-    // create an input component for the app
+    // create the application instance with an input component
+    auto app = Application::Ptr(new Application(960, 600, false));
     auto appInputComponent = new SGAppInputComponent();
     app->setInputComponent(appInputComponent);
 
     // create an input component for the scene manager
-    auto sceneInputComponent = new SGSceneManagerInputComponent();
-    SceneManager *sm = SceneManager::makeSceneManager(sceneInputComponent);
-    app->setSceneManager(SceneManager::Ptr(sm));
+    auto sceneManager = SceneManager::Ptr(new SceneManager());
+    auto sceneManagerInputComponent = new SGSceneManagerInputComponent();
+    sceneManager->setInputComponent(sceneManagerInputComponent);
+
+    // set scenemanager to app
+    app->setSceneManager(SceneManager::Ptr(sceneManager));
 
     // create our mainmenu scene and push it to the scenemanager
-    auto mainMenuScene = makeMainMenuScene(640, 400);
-    sm->pushScene(mainMenuScene);
+    auto mainMenuScene = makeMainMenuScene(glsg::graphics::getWidth(), glsg::graphics::getHeight());
+    sceneManager->pushScene(mainMenuScene);
 
     // create our game scene and push it to the scenemanager
-    auto gameScene = makeGameScene(640, 400);
-    sm->pushScene(gameScene);
+    auto gameScene = makeGameScene(glsg::graphics::getWidth(), glsg::graphics::getHeight());
+    sceneManager->pushScene(gameScene);
 
     // start the app
     app->start();
