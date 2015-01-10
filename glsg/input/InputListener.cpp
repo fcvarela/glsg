@@ -9,36 +9,43 @@ Input InputListener::_input;
 void InputListener::mouse_move_callback(GLFWwindow *window, double x, double y) {
     LDEBUG("MOUSE MOVE CALLBACK");
 
-    _input.type = Input::MOUSEMOVE;
-    _input.x = x;
-    _input.y = y;
+    _input.mouseMove.valid = true;
+
+    _input.mouseMove.dist_x = x - _input.mouseMove.x;
+    _input.mouseMove.dist_y = y - _input.mouseMove.y;
+
+    _input.mouseMove.x = x;
+    _input.mouseMove.y = y;
 }
 
 void InputListener::mouse_click_callback(GLFWwindow *window, int button, int action, int mods) {
     LDEBUG("MOUSE CLICK CALLBACK");
 
-    _input.type = Input::MOUSEBUTTON;
-    _input.button = button;
-    _input.action = action;
-    _input.mods = mods;
+
 }
 
 void InputListener::mouse_scroll_callback(GLFWwindow *window, double x, double y) {
     LDEBUG("MOUSE SCROLL CALLBACK");
 
-    _input.type = Input::MOUSESCROLL;
-    _input.x = x;
-    _input.y = y;
+
 }
 
 void InputListener::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     LDEBUG("KEY CALLBACK");
 
-    _input.type = Input::KEY;
-    _input.key = key;
-    _input.scancode = scancode;
-    _input.action = action;
-    _input.mods = mods;
+    _input.key.valid = true;
+    _input.key.key = key;
+    _input.key.scancode = scancode;
+    _input.key.action = action;
+    _input.key.mods = mods;
+
+    if (action == GLFW_PRESS) {
+        _input.key.active[key] = true;
+    }
+
+    if (action == GLFW_RELEASE) {
+        _input.key.active[key] = false;
+    }
 }
 
 void InputListener::initialize() {
@@ -53,7 +60,11 @@ void InputListener::initialize() {
 
 void InputListener::poll() {
     LDEBUG("Polling events");
-    _input.type = Input::INVALID;
+
+    _input.mouseMove.valid = false;
+    _input.mouseClick.valid = false;
+    _input.key.valid = false;
+
     glfwPollEvents();
 }
 

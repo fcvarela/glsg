@@ -7,14 +7,16 @@ using namespace glsg;
 
 class SGAppInputComponent : public InputComponent {
 public:
-    virtual Command::Ptr run(Object *obj, double dt) {
+    virtual Command::Vec run(Object *obj, double dt) {
         auto input = InputListener::getInput();
 
-        if (input->type == Input::KEY && input->key == GLFW_KEY_ESCAPE) {
+        Command::Vec commands;
+
+        if (input->key.valid && input->key.key == GLFW_KEY_ESCAPE) {
             // this is a quit command
-            return Command::Ptr(new ApplicationQuitCommand());
+            commands.push_back(Command::Ptr(new ApplicationQuitCommand()));
         }
 
-        return nullptr;
+        return commands;
     }
 };

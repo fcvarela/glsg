@@ -4,55 +4,27 @@
 namespace glsg {
 
 typedef struct {
-    /**
-    * Type of input event.
-    * Invalid is used to signal an event has been consumed and will
-    * not match any object rules.
-    */
-    enum Type {
-        INVALID,
-        MOUSEMOVE,
-        MOUSEBUTTON,
-        MOUSESCROLL,
-        KEY,
-    };
+    bool valid;
+    double x, y;
+    double dist_x, dist_y;
+} MouseMove;
 
-    Type type;
-
-    /**
-    * X coordinate of input event.
-    */
-    double x;
-
-    /**
-    * Y coordinate of input event.
-    */
-    double y;
-
-    /**
-    * Key code of input event.
-    */
-    int key;
-
-    /**
-    * HID device button of input event.
-    */
-    int button;
-
-    /**
-    * Action type of input event (press|release)
-    */
+typedef struct {
+    bool valid;
+    double x, y;
     int action;
+} MouseClick;
 
-    /**
-    * Modifiers for input event (alt? shift?)
-    */
-    int mods;
+typedef struct {
+    bool valid;
+    int key, action, mods, scancode;
+    bool active[255];
+} Key;
 
-    /**
-    * Scan code of input event
-    */
-    int scancode;
+typedef struct {
+    MouseMove mouseMove;
+    MouseClick mouseClick;
+    Key key;
 } Input;
 
 }

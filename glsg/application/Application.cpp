@@ -38,8 +38,7 @@ void Application::update(double dt) {
     ShaderRegistry::get()->updateShaders();
 
     // run our component updates
-    auto cmd = _inputComponent->run(this, dt);
-    if (cmd != nullptr) {
+    for (auto cmd: _inputComponent->run(this, dt)) {
         cmd->run(this);
     }
 

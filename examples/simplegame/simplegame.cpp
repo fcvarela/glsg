@@ -4,6 +4,7 @@
 #include <glsg/scene/SceneGraphScene.h>
 
 #include "SGSceneManagerInputComponent.h"
+#include "SGCameraInputComponent.h"
 #include "SGAppInputComponent.h"
 
 using namespace glsg;
@@ -11,6 +12,10 @@ using namespace glsg;
 SceneGraphScene::Ptr makeGameScene(uint32_t width, uint32_t height) {
     auto scene = SceneGraphScene::Ptr(new SceneGraphScene("GameScene", width, height));
     PythonScript<SceneGraphScene>::Ptr(new PythonScript<SceneGraphScene>("game_scene", scene.get()));
+
+    // add our custom handler to this scene's camera (script this later)
+    auto cameraInputComponent = new SGCameraInputComponent();
+    scene->getCamera("mainCamera")->setInputComponent(cameraInputComponent);
     return scene;
 }
 

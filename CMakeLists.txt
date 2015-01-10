@@ -25,6 +25,7 @@ list (APPEND GLSG_SOURCES
     glsg/input/InputListener.cpp
     glsg/log/Log.cpp
     glsg/render/Camera.cpp
+    glsg/render/CameraCommands.h
     glsg/render/Framebuffer.cpp
     glsg/render/GL.cpp
     glsg/render/Mesh.cpp
@@ -68,6 +69,7 @@ list (APPEND GLSG_INCLUDE_FILES
     glsg/input/InputListener.h
     glsg/log/Log.h
     glsg/render/Camera.h
+    glsg/render/CameraCommands.h
     glsg/render/FrameBuffer.h
     glsg/render/GL.h
     glsg/render/Mesh.h

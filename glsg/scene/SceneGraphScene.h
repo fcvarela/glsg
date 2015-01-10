@@ -33,7 +33,12 @@ public:
     /**
     * Sets the camera map entry to provided camera.
     */
-    virtual void setCamera(const std::string &name, Camera::Ptr camera);
+    void setCamera(const std::string &name, Camera::Ptr camera);
+
+    /**
+    * Gets the camera with the given name
+    */
+    Camera::Ptr getCamera(const std::string &name);
 
     /**
     * Sets the root node of the managed scene graph.
